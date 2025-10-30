@@ -4,13 +4,13 @@ include 'db.php';
 $search = "";
 if(isset($_GET["search"]) && trim($_GET['search']) !== "") {
     $search = trim($_GET["search"]);
-    $stmt = $conn->prepare("SELECT * FROM books WHERE title LIKE ? OR author LIKE ? ORDER BY id DESC");
+    $stmt = $conn->prepare("SELECT * FROM books WHERE title LIKE ? OR author LIKE ?");
     $like = "%" . $search . "%";
     $stmt->bind_param("ss", $like, $like);
     $stmt->execute();
     $result = $stmt->get_result();
 } else {
-    $result = $conn->query("SELECT * FROM books ORDER BY id DESC");
+    $result = $conn->query("SELECT * FROM books");
 }
 ?>
 
